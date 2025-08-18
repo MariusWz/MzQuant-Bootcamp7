@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Day 1 - 框架 &amp; 数据 &#8212; MzQuant-Bootcamp7 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="MzQuant-Bootcamp7 量化交易训练营" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="day-1">
+<h1>Day 1 - 框架 &amp; 数据<a class="headerlink" href="#day-1" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>Day1是量化交易训练营的第一天，主要目标是搭建基础框架并完成数据获取与分析。</p>
+<p>完成状态: ✅ 已完成</p>
+</section>
+<section id="id2">
+<h2>里程碑完成情况<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>✅ 本地环境可用</p></li>
+<li><p>✅ 一次性拉取 10 只股票最近 6 年日线</p></li>
+<li><p>✅ 完成一次快速 EDA（分布 + 交互式 K 线）</p></li>
+<li><p>✅ README 记录并推送 GitHub</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>详细任务完成情况<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h3>环境搭建<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p><strong>状态</strong>: ✅ 已完成</p>
+<ul class="simple">
+<li><p>本地开发环境配置完成</p></li>
+<li><p>依赖包安装和配置</p></li>
+<li><p>Python 3.13+ 环境准备就绪</p></li>
+<li><p>Jupyter Notebook 环境可用</p></li>
+</ul>
+</section>
+<section id="id5">
+<h3>数据获取<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p><strong>状态</strong>: ✅ 已完成</p>
+<ul class="simple">
+<li><p>成功获取SPY前10大成分股数据</p></li>
+<li><p>包含最近6年的日线数据</p></li>
+<li><p>数据质量验证通过</p></li>
+<li><p>数据格式标准化</p></li>
+</ul>
+<p><strong>成分股列表（截至2025年7月）</strong>:</p>
+<ol class="arabic simple">
+<li><p>AAPL - Apple Inc.</p></li>
+<li><p>MSFT - Microsoft Corporation</p></li>
+<li><p>AMZN - Amazon.com Inc.</p></li>
+<li><p>NVDA - NVIDIA Corporation</p></li>
+<li><p>GOOGL - Alphabet Inc.</p></li>
+<li><p>META - Meta Platforms Inc.</p></li>
+<li><p>BRK.B - Berkshire Hathaway Inc.</p></li>
+<li><p>UNH - UnitedHealth Group Inc.</p></li>
+<li><p>JNJ - Johnson &amp; Johnson</p></li>
+<li><p>JPM - JPMorgan Chase &amp; Co.</p></li>
+</ol>
+</section>
+<section id="id6">
+<h3>数据分析<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p><strong>状态</strong>: ✅ 已完成</p>
+<ol class="arabic simple">
+<li><p><strong>快速EDA（探索性数据分析）</strong>
+- 数据分布分析
+- 基本统计信息
+- 数据质量检查</p></li>
+<li><p><strong>日收益率计算与可视化（Pairplot）</strong>
+- 收益率计算
+- 相关性分析
+- 分布可视化</p></li>
+<li><p><strong>交互式K线图（Candlestick）展示</strong>
+- 多股票K线图
+- 交互式操作
+- 技术指标叠加</p></li>
+</ol>
+</section>
+</section>
+<section id="id7">
+<h2>技术实现<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
+<p>使用的技术栈:</p>
+<ul class="simple">
+<li><p><strong>数据处理</strong>: Pandas, NumPy</p></li>
+<li><p><strong>可视化</strong>: Matplotlib, Plotly</p></li>
+<li><p><strong>数据源</strong>: 股票市场API</p></li>
+<li><p><strong>开发环境</strong>: Jupyter Notebook</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>代码结构<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<p>主要代码模块:</p>
+<ol class="arabic simple">
+<li><p><strong>数据下载模块</strong>
+- 批量股票数据获取
+- 数据清洗和预处理
+- 数据存储和缓存</p></li>
+<li><p><strong>分析模块</strong>
+- EDA分析函数
+- 收益率计算
+- 统计指标计算</p></li>
+<li><p><strong>可视化模块</strong>
+- 分布图绘制
+- K线图生成
+- 交互式图表</p></li>
+</ol>
+</section>
+<section id="id9">
+<h2>学习成果<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h2>
+<p>通过Day1的学习和实践，掌握了:</p>
+<ol class="arabic simple">
+<li><p><strong>量化交易基础框架搭建</strong>
+- 环境配置
+- 项目结构设计
+- 依赖管理</p></li>
+<li><p><strong>数据获取技术</strong>
+- API调用
+- 批量数据处理
+- 数据质量验证</p></li>
+<li><p><strong>数据分析方法</strong>
+- EDA分析流程
+- 统计分析方法
+- 可视化技术</p></li>
+<li><p><strong>项目文档管理</strong>
+- README编写
+- 代码注释规范
+- 版本控制</p></li>
+</ol>
+</section>
+<section id="id10">
+<h2>下一步计划<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h2>
+<p>Day2将重点学习:</p>
+<ul class="simple">
+<li><p>技术指标计算</p></li>
+<li><p>信号生成算法</p></li>
+<li><p>策略框架设计</p></li>
+<li><p>回测系统搭建</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>相关资源<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="../notebooks/day1.ipynb">Day1 Jupyter Notebook</a></p></li>
+<li><p><a class="reference external" href="https://github.com/your-username/MzQuant-Bootcamp7">项目GitHub仓库</a></p></li>
+<li><p><a class="reference external" href="../README.md">完整README文档</a></p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">MzQuant-Bootcamp7</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">详细内容:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Day 1 - 框架 &amp; 数据</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">里程碑完成情况</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">详细任务完成情况</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">技术实现</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">代码结构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">学习成果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">下一步计划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">相关资源</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">MzQuant-Bootcamp7 量化交易训练营</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, MariusWz.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/day1.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
