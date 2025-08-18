@@ -141,5 +141,5 @@ Day2将重点学习:
 --------
 
 - `Day1 Jupyter Notebook <../notebooks/day1.ipynb>`_
-- `项目GitHub仓库 <https://github.com/your-username/MzQuant-Bootcamp7>`_
+- `项目GitHub仓库 <https://github.com/MariusWz/MzQuant-Bootcamp7>`_
 - `完整README文档 <../README.md>`_
