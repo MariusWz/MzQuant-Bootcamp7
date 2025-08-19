@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>MzQuant-Bootcamp7 量化交易训练营 &#8212; MzQuant-Bootcamp7 0.1 documentation</title>
+    <title>MzQuant-Bootcamp7 量化交易系统搭建实战教程 &#8212; MzQuant-Bootcamp7 0.1 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
@@ -14,7 +14,7 @@
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Day 1 - 框架 &amp; 数据" href="day1.html" />
+    <link rel="next" title="Day 1 - 数据基础设施搭建" href="day1.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -33,68 +33,104 @@
           <div class="body" role="main">
             
   <section id="mzquant-bootcamp7">
-<h1>MzQuant-Bootcamp7 量化交易训练营<a class="headerlink" href="#mzquant-bootcamp7" title="Link to this heading">¶</a></h1>
-<p><strong>7-Day Intensive Quant-Trading Sprint Plan</strong> - 一个为期7天的量化交易强化训练营项目。</p>
-<p>本项目旨在通过7天的密集学习，掌握量化交易的核心技能，从数据获取、分析到策略回测的完整流程。</p>
+<h1>MzQuant-Bootcamp7 量化交易系统搭建实战教程<a class="headerlink" href="#mzquant-bootcamp7" title="Link to this heading">¶</a></h1>
+<p><strong>7-Day Intensive Quant-Trading Sprint Plan</strong> - 手把手教你从零开始搭建完整的量化交易系统。</p>
+<p>本项目通过7天的密集学习，带你掌握量化交易系统的核心架构，从数据基础设施、策略开发、回测框架到风险管理的全流程实战。</p>
 <section id="id1">
-<h2>项目目标<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<h2>学习目标<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <ul class="simple">
-<li><p>掌握量化交易基础框架</p></li>
-<li><p>学习数据获取和处理技术</p></li>
-<li><p>实践技术分析和策略开发</p></li>
-<li><p>完成完整的量化交易项目</p></li>
+<li><p>掌握量化交易系统的基础架构设计</p></li>
+<li><p>学习数据获取、清洗和存储的最佳实践</p></li>
+<li><p>实践技术指标计算和策略信号生成</p></li>
+<li><p>构建完整的回测框架和绩效评估系统</p></li>
+<li><p>理解风险管理和仓位管理的核心概念</p></li>
 </ul>
 </section>
 <section id="id2">
-<h2>内容概览<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<h2>学习进度<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>已完成模块<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
+<p><strong>Day 1 - 数据基础设施搭建</strong> ✅</p>
 <ul class="simple">
-<li><p><strong>Day 1</strong>: 框架搭建与数据获取</p></li>
-<li><p><strong>Day 2</strong>: 技术指标与信号生成</p></li>
-<li><p><strong>Day 3</strong>: 策略开发与回测框架</p></li>
-<li><p><strong>Day 4</strong>: 风险管理与仓位管理</p></li>
-<li><p><strong>Day 5</strong>: 策略优化与参数调优</p></li>
-<li><p><strong>Day 6</strong>: 实盘模拟与性能评估</p></li>
-<li><p><strong>Day 7</strong>: 项目总结与部署</p></li>
+<li><p>搭建本地量化开发环境</p></li>
+<li><p>构建数据管道：批量获取SPY前10大成分股6年日线数据</p></li>
+<li><p>实现数据存储：Parquet格式 + 路径管理优化</p></li>
+<li><p>完成探索性数据分析：分布分析 + 交互式K线图</p></li>
+</ul>
+<p><strong>Day 2 - 策略原型开发</strong> ✅</p>
+<ul class="simple">
+<li><p>实现双均线策略（SMA20/50）+ 波动率过滤（ATR14 + z-score）</p></li>
+<li><p>构建向量化回测框架，实现100%信号覆盖率</p></li>
+<li><p>完成策略绩效评估：年化收益、夏普比率、最大回撤</p></li>
+<li><p>代码函数化重构，支持pytest单元测试</p></li>
 </ul>
 </section>
-<section id="id3">
-<h2>项目结构<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h3>待完成模块<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Day 3</strong>: 策略框架优化与多策略集成</p></li>
+<li><p><strong>Day 4</strong>: 风险管理与仓位管理系统</p></li>
+<li><p><strong>Day 5</strong>: 策略参数优化与机器学习集成</p></li>
+<li><p><strong>Day 6</strong>: 实盘模拟与性能监控系统</p></li>
+<li><p><strong>Day 7</strong>: 系统部署与运维自动化</p></li>
+</ul>
+</section>
+</section>
+<section id="id5">
+<h2>系统架构<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MzQuant-Bootcamp7/
-├── bootcamp7/           # 核心代码目录
-├── docs/               # 文档目录
-├── notebooks/          # Jupyter笔记本
-├── README.md           # 项目说明文档
-└── readthedocs.yaml    # ReadTheDocs配置
+├── bootcamp7/           # 核心系统代码
+├── docs/               # 系统文档
+├── notebooks/          # 学习与开发笔记本
+├── data/               # 数据存储目录
+│   ├── raw/           # 原始数据
+│   └── backtest_results/ # 回测结果
+├── README.md           # 系统说明文档
+└── readthedocs.yaml    # 文档部署配置
 </pre></div>
 </div>
 </section>
-<section id="id4">
-<h2>快速开始<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h2>
-<p><strong>环境要求</strong>: Python 3.13+, Jupyter Notebook</p>
-<p><strong>技术栈</strong>: Pandas, NumPy, Matplotlib, Plotly</p>
-<p><strong>文档</strong>: 使用Sphinx构建</p>
+<section id="id6">
+<h2>技术栈<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<p><strong>核心语言</strong>: Python 3.13+</p>
+<p><strong>数据处理</strong>: Pandas, NumPy, PyArrow</p>
+<p><strong>技术分析</strong>: TA-Lib, Pandas-TA</p>
+<p><strong>可视化</strong>: Matplotlib, Plotly</p>
+<p><strong>开发环境</strong>: Jupyter Notebook, pytest</p>
+<p><strong>文档构建</strong>: Sphinx</p>
 </section>
-<section id="id5">
-<h2>学习内容<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h2>
+<section id="id7">
+<h2>学习内容<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h2>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">每日学习记录:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="day1.html">Day 1 - 框架 &amp; 数据</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="day1.html">Day 1 - 数据基础设施搭建</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="day1.html#id1">概述</a></li>
-<li class="toctree-l2"><a class="reference internal" href="day1.html#id2">里程碑完成情况</a></li>
-<li class="toctree-l2"><a class="reference internal" href="day1.html#id3">详细任务完成情况</a></li>
-<li class="toctree-l2"><a class="reference internal" href="day1.html#id7">技术实现</a></li>
-<li class="toctree-l2"><a class="reference internal" href="day1.html#id8">代码结构</a></li>
-<li class="toctree-l2"><a class="reference internal" href="day1.html#id9">学习成果</a></li>
-<li class="toctree-l2"><a class="reference internal" href="day1.html#id10">下一步计划</a></li>
-<li class="toctree-l2"><a class="reference internal" href="day1.html#id11">相关资源</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1.html#id2">核心成就</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1.html#id3">系统架构设计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1.html#id7">工程实践要点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1.html#id10">数据管道架构</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1.html#id14">学习成果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1.html#id15">下一步计划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day1.html#id16">相关资源</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="day2.html">Day 2 - 策略原型开发</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="day2.html#id1">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day2.html#id2">核心成就</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day2.html#id3">技术架构详解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day2.html#id8">绩效评估系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day2.html#id11">代码架构设计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day2.html#id15">学习成果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day2.html#id16">下一步计划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="day2.html#id17">相关资源</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </section>
-<section id="id6">
-<h2>相关链接<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h2>
+<section id="id8">
+<h2>相关链接<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/MariusWz/MzQuant-Bootcamp7">项目GitHub仓库</a></p></li>
 <li><p><a class="reference external" href="../README.md">完整README文档</a></p></li>
@@ -130,14 +166,15 @@
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <p class="caption" role="heading"><span class="caption-text">每日学习记录:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="day1.html">Day 1 - 框架 &amp; 数据</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day1.html">Day 1 - 数据基础设施搭建</a></li>
+<li class="toctree-l1"><a class="reference internal" href="day2.html">Day 2 - 策略原型开发</a></li>
 </ul>
 
 <div class="relations">
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
-      <li>Next: <a href="day1.html" title="next chapter">Day 1 - 框架 &amp; 数据</a></li>
+      <li>Next: <a href="day1.html" title="next chapter">Day 1 - 数据基础设施搭建</a></li>
   </ul></li>
 </ul>
 </div>

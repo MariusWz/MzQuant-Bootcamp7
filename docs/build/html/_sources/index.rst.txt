@@ -3,52 +3,80 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-MzQuant-Bootcamp7 量化交易训练营
-================================
+MzQuant-Bootcamp7 量化交易系统搭建实战教程
+========================================
 
-**7-Day Intensive Quant-Trading Sprint Plan** - 一个为期7天的量化交易强化训练营项目。
+**7-Day Intensive Quant-Trading Sprint Plan** - 手把手教你从零开始搭建完整的量化交易系统。
 
-本项目旨在通过7天的密集学习，掌握量化交易的核心技能，从数据获取、分析到策略回测的完整流程。
+本项目通过7天的密集学习，带你掌握量化交易系统的核心架构，从数据基础设施、策略开发、回测框架到风险管理的全流程实战。
 
-项目目标
+学习目标
 --------
 
-- 掌握量化交易基础框架
-- 学习数据获取和处理技术
-- 实践技术分析和策略开发
-- 完成完整的量化交易项目
+- 掌握量化交易系统的基础架构设计
+- 学习数据获取、清洗和存储的最佳实践
+- 实践技术指标计算和策略信号生成
+- 构建完整的回测框架和绩效评估系统
+- 理解风险管理和仓位管理的核心概念
 
-内容概览
+学习进度
 --------
 
-- **Day 1**: 框架搭建与数据获取
-- **Day 2**: 技术指标与信号生成
-- **Day 3**: 策略开发与回测框架
-- **Day 4**: 风险管理与仓位管理
-- **Day 5**: 策略优化与参数调优
-- **Day 6**: 实盘模拟与性能评估
-- **Day 7**: 项目总结与部署
+已完成模块
+~~~~~~~~~~
 
-项目结构
+**Day 1 - 数据基础设施搭建** ✅
+
+- 搭建本地量化开发环境
+- 构建数据管道：批量获取SPY前10大成分股6年日线数据
+- 实现数据存储：Parquet格式 + 路径管理优化
+- 完成探索性数据分析：分布分析 + 交互式K线图
+
+**Day 2 - 策略原型开发** ✅
+
+- 实现双均线策略（SMA20/50）+ 波动率过滤（ATR14 + z-score）
+- 构建向量化回测框架，实现100%信号覆盖率
+- 完成策略绩效评估：年化收益、夏普比率、最大回撤
+- 代码函数化重构，支持pytest单元测试
+
+待完成模块
+~~~~~~~~~~
+
+- **Day 3**: 策略框架优化与多策略集成
+- **Day 4**: 风险管理与仓位管理系统
+- **Day 5**: 策略参数优化与机器学习集成
+- **Day 6**: 实盘模拟与性能监控系统
+- **Day 7**: 系统部署与运维自动化
+
+系统架构
 --------
 
 .. code-block:: text
 
    MzQuant-Bootcamp7/
-   ├── bootcamp7/           # 核心代码目录
-   ├── docs/               # 文档目录
-   ├── notebooks/          # Jupyter笔记本
-   ├── README.md           # 项目说明文档
-   └── readthedocs.yaml    # ReadTheDocs配置
+   ├── bootcamp7/           # 核心系统代码
+   ├── docs/               # 系统文档
+   ├── notebooks/          # 学习与开发笔记本
+   ├── data/               # 数据存储目录
+   │   ├── raw/           # 原始数据
+   │   └── backtest_results/ # 回测结果
+   ├── README.md           # 系统说明文档
+   └── readthedocs.yaml    # 文档部署配置
 
-快速开始
---------
+技术栈
+------
 
-**环境要求**: Python 3.13+, Jupyter Notebook
+**核心语言**: Python 3.13+
 
-**技术栈**: Pandas, NumPy, Matplotlib, Plotly
+**数据处理**: Pandas, NumPy, PyArrow
 
-**文档**: 使用Sphinx构建
+**技术分析**: TA-Lib, Pandas-TA
+
+**可视化**: Matplotlib, Plotly
+
+**开发环境**: Jupyter Notebook, pytest
+
+**文档构建**: Sphinx
 
 学习内容
 --------
@@ -58,7 +86,7 @@ MzQuant-Bootcamp7 量化交易训练营
    :caption: 每日学习记录:
 
    day1
-   # day2
+   day2
    # day3
    # day4
    # day5

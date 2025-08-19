@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Day 2 - 策略原型开发 &#8212; MzQuant-Bootcamp7 0.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=2709fde1"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Day 1 - 数据基础设施搭建" href="day1.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="day-2">
+<h1>Day 2 - 策略原型开发<a class="headerlink" href="#day-2" title="Link to this heading">¶</a></h1>
+<section id="id1">
+<h2>概述<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<p>Day2是量化交易系统搭建的关键一步，主要目标是开发第一个可运行的交易策略原型，包括技术指标计算、策略逻辑实现、回测框架构建和绩效评估系统。</p>
+<p>完成状态: ✅ 已完成</p>
+</section>
+<section id="id2">
+<h2>核心成就<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>✅ 实现双均线策略（SMA20/50）+ 波动率过滤（ATR14 + z-score）</p></li>
+<li><p>✅ 构建向量化回测框架，实现100%信号覆盖率</p></li>
+<li><p>✅ 完成策略绩效评估：年化收益、夏普比率、最大回撤</p></li>
+<li><p>✅ 代码函数化重构，支持pytest单元测试</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>技术架构详解<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h2>
+<section id="id4">
+<h3>技术指标层<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<p><strong>1.1 SMA双均线系统</strong></p>
+<p>使用Pandas-TA库计算20日和50日简单移动平均线：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;SMA_20&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">SMAIndicator</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">Close</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span><span class="o">.</span><span class="n">sma_indicator</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;SMA_50&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">SMAIndicator</span><span class="p">(</span><span class="n">close</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">Close</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">sma_indicator</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>1.2 ATR波动率指标</strong></p>
+<p>计算14日平均真实波幅，衡量市场波动率：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ATR_14&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">AverageTrueRange</span><span class="p">(</span>
+    <span class="n">high</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">High</span><span class="p">,</span>
+    <span class="n">low</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">Low</span><span class="p">,</span>
+    <span class="n">close</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">Close</span><span class="p">,</span>
+    <span class="n">window</span><span class="o">=</span><span class="mi">14</span>
+<span class="p">)</span><span class="o">.</span><span class="n">average_true_range</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>1.3 波动率过滤z-score</strong></p>
+<p>用ATR的252日滚动均值与标准差计算z-score，识别异常波动时期：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;zscore&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ATR_14&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ATR_14&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;ATR_14&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">rolling</span><span class="p">(</span><span class="mi">252</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h3>策略逻辑层<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
+<p><strong>2.1 双均线交叉信号</strong></p>
+<p>当SMA20 &gt; SMA50时产生买入信号，否则为空仓：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Signal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;SMA_20&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;SMA_50&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>2.2 波动率过滤</strong></p>
+<p>当ATR z-score &lt; 1（即波动率较低）时才允许开仓：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Vol_filter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;zscore&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>持仓矩阵层<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
+<p><strong>3.1 滞后处理</strong></p>
+<p>持仓信号需要滞后1天，避免”未来函数”：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Signal&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Vol_filter&#39;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;boolean&#39;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">ffill</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h3>回测框架层<a class="headerlink" href="#id7" title="Link to this heading">¶</a></h3>
+<p><strong>4.1 收益率计算</strong></p>
+<p>标的每日收益率和策略收益：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Close&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pct_change</span><span class="p">()</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Strategy_Return&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Position&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Return&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><strong>4.2 净值曲线</strong></p>
+<p>用累计乘积计算策略净值曲线：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Equity_Curve&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Strategy_Return&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">cumprod</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2>绩效评估系统<a class="headerlink" href="#id8" title="Link to this heading">¶</a></h2>
+<section id="id9">
+<h3>核心指标计算<a class="headerlink" href="#id9" title="Link to this heading">¶</a></h3>
+<p><strong>年化复合收益率 (CAGR)</strong></p>
+<div class="math notranslate nohighlight">
+\[CAGR = \left(\frac{Equity_{end}}{Equity_{start}}\right)^{\frac{252}{n}} - 1\]</div>
+<p><strong>夏普比率 (Sharpe Ratio)</strong></p>
+<div class="math notranslate nohighlight">
+\[Sharpe = \frac{E[daily\_return]}{Std[daily\_return]} \times \sqrt{252}\]</div>
+<p><strong>最大回撤 (Max Drawdown)</strong></p>
+<p>基于equity_curve的滚动高点计算：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">roll_max</span> <span class="o">=</span> <span class="n">er</span><span class="o">.</span><span class="n">cummax</span><span class="p">()</span>
+<span class="n">dd</span> <span class="o">=</span> <span class="n">er</span> <span class="o">/</span> <span class="n">roll_max</span> <span class="o">-</span> <span class="mi">1</span>
+<span class="n">mdd</span> <span class="o">=</span> <span class="n">dd</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="id10">
+<h3>评估结果示例<a class="headerlink" href="#id10" title="Link to this heading">¶</a></h3>
+<p>以AAPL为例的策略绩效：</p>
+<ul class="simple">
+<li><p><strong>CAGR</strong>: 1.73%</p></li>
+<li><p><strong>年化收益率</strong>: 2.76%</p></li>
+<li><p><strong>年化波动率</strong>: 14.45%</p></li>
+<li><p><strong>夏普比率</strong>: 0.19</p></li>
+<li><p><strong>最大回撤</strong>: -32.21%</p></li>
+<li><p><strong>信号覆盖率</strong>: 100.00%</p></li>
+</ul>
+</section>
+</section>
+<section id="id11">
+<h2>代码架构设计<a class="headerlink" href="#id11" title="Link to this heading">¶</a></h2>
+<section id="id12">
+<h3>函数化设计<a class="headerlink" href="#id12" title="Link to this heading">¶</a></h3>
+<ol class="arabic simple">
+<li><p><strong>calculate_indicators(df)</strong>: 技术指标计算</p></li>
+<li><p><strong>strategy_logic(df)</strong>: 策略逻辑实现</p></li>
+<li><p><strong>position_matrix(df)</strong>: 持仓矩阵生成</p></li>
+<li><p><strong>calculate_returns(df)</strong>: 收益率计算</p></li>
+<li><p><strong>evaluate_strategy(df)</strong>: 策略评估</p></li>
+</ol>
+</section>
+<section id="id13">
+<h3>数据存储优化<a class="headerlink" href="#id13" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>使用Parquet格式存储回测结果</p></li>
+<li><p>自动创建数据目录结构</p></li>
+<li><p>支持跨平台路径管理</p></li>
+</ul>
+</section>
+<section id="id14">
+<h3>测试框架<a class="headerlink" href="#id14" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>支持pytest单元测试</p></li>
+<li><p>函数接口标准化</p></li>
+<li><p>错误处理机制完善</p></li>
+</ul>
+</section>
+</section>
+<section id="id15">
+<h2>学习成果<a class="headerlink" href="#id15" title="Link to this heading">¶</a></h2>
+<p>通过Day2的学习和实践，掌握了：</p>
+<ol class="arabic simple">
+<li><p><strong>技术指标计算技术</strong>
+- Pandas-TA库的使用
+- 向量化计算的优势
+- 滚动窗口操作</p></li>
+<li><p><strong>策略开发流程</strong>
+- 信号生成逻辑
+- 波动率过滤机制
+- 持仓管理策略</p></li>
+<li><p><strong>回测系统构建</strong>
+- 向量化回测框架
+- 收益率计算方法
+- 绩效指标计算</p></li>
+<li><p><strong>代码工程实践</strong>
+- 函数化重构
+- 模块化设计
+- 测试驱动开发</p></li>
+</ol>
+</section>
+<section id="id16">
+<h2>下一步计划<a class="headerlink" href="#id16" title="Link to this heading">¶</a></h2>
+<p>Day3将重点学习：</p>
+<ul class="simple">
+<li><p>策略框架优化</p></li>
+<li><p>多策略集成</p></li>
+<li><p>参数优化方法</p></li>
+<li><p>风险管理框架</p></li>
+</ul>
+</section>
+<section id="id17">
+<h2>相关资源<a class="headerlink" href="#id17" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="../notebooks/day2.ipynb">Day2 Jupyter Notebook</a></p></li>
+<li><p><a class="reference external" href="https://github.com/MariusWz/MzQuant-Bootcamp7">项目GitHub仓库</a></p></li>
+<li><p><a class="reference external" href="../README.md">完整README文档</a></p></li>
+</ul>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">MzQuant-Bootcamp7</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">每日学习记录:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="day1.html">Day 1 - 数据基础设施搭建</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Day 2 - 策略原型开发</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">概述</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">核心成就</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">技术架构详解</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">绩效评估系统</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">代码架构设计</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id15">学习成果</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id16">下一步计划</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id17">相关资源</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="day1.html" title="previous chapter">Day 1 - 数据基础设施搭建</a></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2025, MariusWz.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/day2.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
